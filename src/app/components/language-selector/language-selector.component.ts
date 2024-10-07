@@ -16,6 +16,7 @@ import { LanguageService } from '../../service/language.service';
 })
 export class LanguageSelectorComponent {
   languageService = inject(LanguageService);
+  currentLang = this.languageService.currentLang;
 
   languages = signal([
     { code: 'en', flag: '🇺🇸' },
