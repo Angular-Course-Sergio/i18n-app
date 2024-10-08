@@ -12,8 +12,11 @@ export const SERVER_LANG_TOKEN = new InjectionToken<string>(
 export class LanguageService {
   cookie = inject(SsrCookieService);
   translate = inject(TranslateService);
+  langServer = inject(SERVER_LANG_TOKEN, {
+    optional: true,
+  });
 
-  currentLang = signal('');
+  currentLang = signal(this.langServer ?? 'en');
 
   changeLang(lang: string) {
     this.cookie.set('lang', lang);

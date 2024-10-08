@@ -33,7 +33,12 @@ export function app(): express.Express {
   server.get('**', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;
 
-    const lang = 'Espanol';
+    console.log('Hola mundo desde server.ts');
+    const cookies = headers.cookie ?? '';
+    const langCookie =
+      cookies.split(';').find((cookie) => cookie.includes('lang')) ?? 'lang=en';
+
+    const [, lang] = langCookie.split('=');
 
     commonEngine
       .render({
